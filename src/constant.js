@@ -1,11 +1,9 @@
 export const types = {
-  'accountMobile': '手机号码',
-  'accountEmail': '邮箱',
-  'cardNumber': '银行卡号',
-  'idNumber': '身份证号码',
-  'ipAddress': "ip地址",
-  'deviceId': '设备',
-  'qqNumber': 'QQ'
+  'movie': '电影',
+  'actor': '男演员',
+  'actress': '女演员',
+  'direct': '导演',
+  'music': '配乐'
 }
 
 // D3力导向图效果
