@@ -3,28 +3,20 @@ import { inject, observer } from 'mobx-react';
 import { vertexTypsColors } from '../../icons';
 
 
-@inject(({uiStore}) => ({theme: uiStore.theme, blackIcons: uiStore.blackIcons, icons: uiStore.icons, colorSignType: uiStore.colorSignType}))
+@inject(({uiStore}) => ({theme: uiStore.theme, icons: uiStore.icons, colorSignType: uiStore.colorSignType}))
 @observer
 export class VertexElement extends React.Component {
   render() {
-    const { node, store, theme, blackIcons, icons, colorSignType } = this.props;
-    let stroke;
-    if (colorSignType) {
-      stroke = node.black ? theme.vertexBlackColor : 'transparent';
-    } else {
-      stroke = node.black ? theme.vertexBlackColor : theme.vertexColor
-    }
-    // const str = node.data.seqId || node.data.value;
-    // const higtLight = !current && !currentLink || node.isSelectRelate ;
+    const { node, theme, icons, colorSignType } = this.props;
     const r = [<g id={node.id} key="node" style={{cursor: 'pointer'}}>
-      <circle key="node-circle" r={15} strokeWidth={colorSignType && node.black ? 3 : 1} stroke={stroke} fill={colorSignType ? vertexTypsColors[node.type] : theme.vertexBgColor}/>
+      <circle key="node-circle" r={15} strokeWidth={1} stroke={colorSignType ? 'transparent' : theme.vertexColor} fill={colorSignType ? vertexTypsColors[node.type] : theme.vertexBgColor}/>
       {
-        !colorSignType && <image key="node-img" xlinkHref={node.black ? blackIcons(node.type) :icons(node.type)} width={20} height={20} x={-10} y={-10}/>
+        !colorSignType && <image key="node-img" xlinkHref={icons(node.type)} width={20} height={20} x={-10} y={-10}/>
       }
       {
         node.selected && (
           <use
-            xlinkHref={`#${node.black ? 'selectedSignBlack' : 'selectedSign'}`}
+            xlinkHref="#selectedSign"
             x={4}
             y={0}
           />
@@ -53,7 +45,6 @@ export function vertexClick(store, forceComponent) {
     const modeClickMap = {
       'default': () => {
         const singleSelect = !(d3Event.metaKey || d3Event.ctrlKey);
-        // store.currentLink = null;
         store.current = d;
         if (singleSelect) {
           store.unSelectAll();

@@ -20,9 +20,6 @@ class VertexEditDialog extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.visible && nextProps.visible) {
-      // const { current } = nextProps.graphStore;
-      // const { locked, showText, type, value, black } = current;
-      // this.props.form.setFieldsValue({locked, showText, type, value, black});
       this.props.form.resetFields();
     }
   }
@@ -87,18 +84,6 @@ class VertexEditDialog extends Component {
             >
               {getFieldDecorator('showText', {
                 initialValue: current.showText,
-                valuePropName: 'checked'
-              })(
-                <Checkbox />
-              )}
-            </FormItem>
-            
-            <FormItem
-              {...formItemLayout}
-              label="黑名单"
-            >
-              {getFieldDecorator('black', {
-                initialValue: current.black,
                 valuePropName: 'checked'
               })(
                 <Checkbox />

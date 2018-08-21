@@ -7,7 +7,6 @@ export default class Vertex {
   @observable value;
   @observable selected = false;
   @observable showText = false;
-  @observable black = false;
   @observable locked = false;
 
   constructor(attrs) {

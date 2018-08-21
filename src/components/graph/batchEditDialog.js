@@ -80,18 +80,6 @@ class BatchEditDialog extends Component {
             
             <FormItem
               {...formItemLayout}
-              label="黑名单"
-            >
-              {getFieldDecorator('black', {
-                initialValue: false,
-                valuePropName: 'checked'
-              })(
-                <Checkbox />
-              )}
-            </FormItem>
-            
-            <FormItem
-              {...formItemLayout}
               label="固定"
             >
               {getFieldDecorator('locked', {

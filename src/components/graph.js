@@ -119,10 +119,12 @@ class graph extends Component {
   }
 
   setSize = () => {
-    const width = this.root.offsetWidth;
-    const tools = document.getElementById('tools')
-    const height = document.documentElement.clientHeight - tools.offsetHeight - 55
-    this.setState({ width, height });
+    setTimeout(() => {
+      const width = this.root.offsetWidth;
+      const tools = document.getElementById('tools')
+      const height = document.documentElement.clientHeight - tools.offsetHeight - 55
+      this.setState({ width, height });
+    }, 50);
   }
 
   componentDidMount() {
@@ -164,7 +166,7 @@ class graph extends Component {
     const { width, height } = this.state;
     const { graphStore, uiStore } = this.props;
     const { vertexs, edges } = graphStore;
-    const { theme, icons, blackIcons, colorSignType } = uiStore;
+    const { theme, icons, colorSignType } = uiStore;
     return (
       <div ref={root => this.root = root}>
         <Tools graphComponent={this}/>
@@ -206,10 +208,6 @@ class graph extends Component {
             <g id="selectedSign">
               <circle cx="7" cy="7" key="node-circle" r={6} strokeWidth="1" stroke="transparent" fill={theme.vertexBgColor} />
               <image width="14" height="14" xlinkHref={icons('selected')} />
-            </g>
-            <g id="selectedSignBlack">
-              <circle cx="7" cy="7" key="node-circle" r={6} strokeWidth="1" stroke="transparent" fill={theme.vertexBgColor} />
-              <image width="14" height="14" xlinkHref={blackIcons('selected')} />
             </g>
             <image xlinkHref={icons('locked')} width="7" height="9" id="lock"></image>
           </defs>

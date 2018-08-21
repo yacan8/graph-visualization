@@ -34,9 +34,4 @@ export default class UiStore {
     const theme = this.theme
     return getBaseUrlIcons(theme.vertexColor);
   }
-
-  @computed get blackIcons() {
-    const theme = this.theme
-    return getBaseUrlIcons(theme.vertexBlackColor);
-  }
 }

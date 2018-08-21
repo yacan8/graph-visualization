@@ -29,7 +29,7 @@ class VertexDialog extends Component {
       const datas = [];
       for (let i = 0; i < num; i++) {
         const data = {
-          type, value: `mock_${types[type]}`, showText: false, black: false
+          type, value: `mock_${types[type]}`, showText: false
         }
         datas.push(data);
       }
