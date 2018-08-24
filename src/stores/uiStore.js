@@ -1,5 +1,4 @@
 import { observable, action, computed } from 'mobx';
-import themes from '../theme';
 import { getBaseUrlIcons } from '../icons';
 
 export default class UiStore {
@@ -14,6 +13,11 @@ export default class UiStore {
     }
   };
 
+  constructor(themes) {
+    this.themes = themes;
+  }
+
+  @observable themes = {};
   @observable themeMode = "default";
   @observable colorSignType = false;
   @observable vertexDialogVisible = false;
@@ -27,7 +31,7 @@ export default class UiStore {
   @action setBackupDialogVisible = v => this.backupDialogVisible = v;
 
   @computed get theme() {
-    return themes[this.themeMode];
+    return this.themes[this.themeMode];
   }
 
   @computed get icons() {

@@ -2,41 +2,42 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { vertexTypsColors } from '../../icons';
 
-
-@inject(({uiStore}) => ({theme: uiStore.theme, icons: uiStore.icons, colorSignType: uiStore.colorSignType}))
+@inject(({ uiStore }) => ({ theme: uiStore.theme, icons: uiStore.icons, colorSignType: uiStore.colorSignType }))
 @observer
 export class VertexElement extends React.Component {
   render() {
     const { node, theme, icons, colorSignType } = this.props;
-    const r = [<g id={node.id} key="node" style={{cursor: 'pointer'}}>
-      <circle key="node-circle" r={15} strokeWidth={1} stroke={colorSignType ? 'transparent' : theme.vertexColor} fill={colorSignType ? vertexTypsColors[node.type] : theme.vertexBgColor}/>
+
+    return <React.Fragment>
+      <g id={node.id} key="node" style={{ cursor: 'pointer' }}>
+        <circle key="node-circle" r={15} strokeWidth={1} stroke={colorSignType ? 'transparent' : theme.vertexStroke} fill={colorSignType ? vertexTypsColors[node.type] : theme.vertexBgColor} />
+        {
+          !colorSignType && <image key="node-img" xlinkHref={icons(node.type)} width={20} height={20} x={-10} y={-10} />
+        }
+        {
+          node.selected && (
+            <use
+              xlinkHref="#selectedSign"
+              x={4}
+              y={0}
+            />
+          )
+        }
+      </g>
       {
-        !colorSignType && <image key="node-img" xlinkHref={icons(node.type)} width={20} height={20} x={-10} y={-10}/>
+        !!node.showText && <text dy={30} key="text" textAnchor="middle" fill={theme.textColor}>
+          {node.vertexTip}
+        </text>
       }
       {
-        node.selected && (
-          <use
-            xlinkHref="#selectedSign"
-            x={4}
-            y={0}
-          />
-        )
+        node.locked && <use
+          key="lock"
+          xlinkHref="#lock"
+          x={7}
+          y={-15}
+        />
       }
-    </g>];
-    if (node.showText) {
-      r.push(<text dy={30} key="text" textAnchor="middle" fill={theme.textColor}>
-        {node.vertexTip}
-      </text>);
-    }
-    if (node.locked) {
-      r.push(<use
-        key="lock"
-        xlinkHref="#lock"
-        x={7}
-        y={-15}
-      />);
-    }
-    return r;
+    </React.Fragment>
   }
 }
 
