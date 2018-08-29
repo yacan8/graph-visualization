@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { Icon, Tooltip, message, Modal, Menu, Dropdown } from 'antd';
 import { confirmText } from './utils';
 import theme from '../theme';
-import { BlockPicker } from 'react-color';
+// import { BlockPicker } from 'react-color';
 
 const confirm = Modal.confirm;
 const notAllowStyle = { opacity: 0.3, cursor: 'not-allowed' };
@@ -170,7 +170,7 @@ export default class Tools extends Component {
         </div>} placement="bottomRight">
           <a style={{float: 'right'}} className="tool-item"><Icon type="question" /></a>
         </Tooltip>
-        <BlockPicker />
+        {/* <BlockPicker /> */}
       </div>
     );
   }
